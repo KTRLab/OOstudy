@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="test.xsl"?>
+<TITLE value="Garbage List">
+ <SUBTITLE weekday="Monday">
+  <CONTENTS GARBAGE="builder.garbage.Burnable" HOW="燃えるごみビニールに入れる" WHERE="だいだい色の箱" WHEN="前日の夜">
+  </CONTENTS>
+ </SUBTITLE>
+ <SUBTITLE weekday="Tuesday">
+  <CONTENTS GARBAGE="builder.garbage.Nonburnable" HOW="燃えないごみビニールに入れる" WHERE="緑色の箱" WHEN="前日の夜">
+  </CONTENTS>
+ </SUBTITLE>
+ <SUBTITLE weekday="Wednesday">
+  <CONTENTS GARBAGE="builder.garbage.Largesized" HOW="シールを張る。" WHERE="マンション前" WHEN="当日7:00まで">
+  </CONTENTS>
+  <CONTENTS GARBAGE="builder.garbage.Burnable" HOW="燃えるごみビニールに入れる" WHERE="だいだい色の箱" WHEN="前日の夜">
+  </CONTENTS>
+ </SUBTITLE>
+ <SUBTITLE weekday="Thursday">
+  <CONTENTS GARBAGE="builder.garbage.PaperRecyclable" HOW="ひもで縛る" WHERE="[マンションの前|軒下]" WHEN="当日7:00まで">
+  </CONTENTS>
+ </SUBTITLE>
+ <SUBTITLE weekday="Friday">
+  <CONTENTS GARBAGE="builder.garbage.PlasticRecyclable" HOW="透明なビニール袋に入れる" WHERE="マンション前" WHEN="当日7:00まで">
+  </CONTENTS>
+  <CONTENTS GARBAGE="builder.garbage.Nonburnable" HOW="燃えないごみビニールに入れる" WHERE="緑色の箱" WHEN="前日の夜">
+  </CONTENTS>
+ </SUBTITLE>
+</TITLE>
