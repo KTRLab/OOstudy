@@ -30,13 +30,13 @@ public class SupplyAssembler {
 	}
 
 	public void createSupply(String id, SupplyDTO supplyDTO) {
-		Supplier supplier = Resistry.findSupplyByName(supplyDTO.getSupplyname());
+		Supplier supplier = ResistrySupply.findSupplyByName(supplyDTO.getSupplyname());
 		if (supplier == null) {
 			throw new FatalAppRuntimeException("supply not found.",this.getClass());
 		}
 		Supply supply = new Supply(supplyDTO.getSupplyname(), supplier);
 		createSupplyElements(supplyDTO.getSupplyelement(), supply);
-		Resistry.insertSuppliy(id, supply);
+		ResistrySupply.insertSuppliy(id, supply);
 	}
 
 	private void createSupplyElements(SupplyElementDTO[] supplyelements, Supply supply) {
@@ -48,7 +48,7 @@ public class SupplyAssembler {
 	}
 
 	public void updataSupply(String id, SupplyDTO supplyDTO) {
-		Supply supply = Resistry.findSupply(id);
+		Supply supply = ResistrySupply.findSupply(id);
 		if (supply == null) {
 			throw new FatalAppRuntimeException("supply not found.",this.getClass());
 		}
@@ -56,7 +56,7 @@ public class SupplyAssembler {
 			supply.setName(supplyDTO.getSupplyname());
 		}
 		if (!supply.getSupplier().getName().equals(supplyDTO.getSuppliername())) {
-			Supplier supplier = Resistry.findSupplyByName(supplyDTO.getSuppliername());
+			Supplier supplier = ResistrySupply.findSupplyByName(supplyDTO.getSuppliername());
 			if (supplier == null) {
 				throw new FatalAppRuntimeException("supplier not found.",this.getClass());
 			}

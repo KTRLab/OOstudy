@@ -3,7 +3,7 @@ package inter.dto;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Resistry {
+public class ResistrySupply {
 
 	private static Map<String, Supplier> suppliers = new HashMap<String, Supplier>();
 
