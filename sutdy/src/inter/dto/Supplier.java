@@ -7,11 +7,11 @@ package inter.dto;
 public class Supplier {
 
 	private String name;
-	private String id;
+	private SupplierCategory category;
 
-	public Supplier(String name, String id) {
+	public Supplier(String name, SupplierCategory category) {
 		this.name = name;
-		this.id = id;
+		this.category = category;
 	}
 
 	public String getName() {
@@ -22,12 +22,12 @@ public class Supplier {
 		this.name = name;
 	}
 
-	public String getId() {
-		return id;
+	public SupplierCategory getCategory() {
+		return category;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setCategory(SupplierCategory category) {
+		this.category = category;
 	}
 
 
