@@ -5,32 +5,32 @@ import java.util.Map;
 
 public class Resistry {
 
-	private static Map<String, Artist> artists = new HashMap<String, Artist>();
+	private static Map<String, Supplier> suppliers = new HashMap<String, Supplier>();
 
-	public static Artist findArtistByName(String name) {
-		return artists.get(name);
+	public static Supplier findSupplyByName(String name) {
+		return suppliers.get(name);
 	}
 
-	public static void insertArtist(Artist artist) {
-		artists.put(artist.getName(), artist);
+	public static void insertSupply(Supplier artist) {
+		suppliers.put(artist.getName(), artist);
 	}
 
-	public static void clearArtist() {
-		artists.clear();
+	public static void clearSupplier() {
+		suppliers.clear();
 	}
 
-	private static Map<String, Album> albums = new HashMap<String, Album>();
+	private static Map<String, Supply> supplies = new HashMap<String, Supply>();
 
-	public static Album findAlbum(String id) {
-		return albums.get(id);
+	public static Supply findSupply(String id) {
+		return supplies.get(id);
 	}
 
-	public static void insertAlbum(String id, Album album) {
-		albums.put(id, album);
+	public static void insertSuppliy(String id, Supply supply) {
+		supplies.put(id, supply);
 	}
 
-	public static void clearAlbum() {
-		albums.clear();
+	public static void clearSupply() {
+		supplies.clear();
 	}
 
 }
