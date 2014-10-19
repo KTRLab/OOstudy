@@ -3,13 +3,13 @@
  */
 package common;
 
-import inter.WeatherState;
-import inter.framework.Template;
-import inter.garbage.Burnable;
-import inter.garbage.Largesized;
-import inter.garbage.Nonburnable;
-import inter.garbage.PaperRecyclable;
-import inter.garbage.PlasticRecyclable;
+import flyweight.WeatherState;
+import flyweight.framework.Template;
+import flyweight.garbage.Burnable;
+import flyweight.garbage.Largesized;
+import flyweight.garbage.Nonburnable;
+import flyweight.garbage.PaperRecyclable;
+import flyweight.garbage.PlasticRecyclable;
 
 import java.util.HashMap;
 import java.util.Map;
