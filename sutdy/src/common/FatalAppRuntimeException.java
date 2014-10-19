@@ -1,6 +1,5 @@
 package common;
 
-import org.apache.log4j.Logger;
 
 /**
  * アプリケーションの自己回復不能エラー発生時のエクセプション.
@@ -10,12 +9,12 @@ import org.apache.log4j.Logger;
 public class FatalAppRuntimeException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-	protected FatalAppRuntimeException(Exception e,Logger log) {
+	public FatalAppRuntimeException(Exception e,Class clazz) {
 		super(e);
-		log.fatal("No Recovery");
+		CustumLogger.getLogger().fatal("No Recovery");
 	}
 
-	protected FatalAppRuntimeException(String message,Logger log) {
-		log.debug(message);
+	public FatalAppRuntimeException(String message,Class clazz) {
+		CustumLogger.getLogger().debug(message);
 	}
 }
