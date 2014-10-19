@@ -1,7 +1,15 @@
-package inter.dto;
+package inter.dto.test;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import inter.dto.ResistrySupply;
+import inter.dto.Supplier;
+import inter.dto.SupplierCategory;
+import inter.dto.Supply;
+import inter.dto.SupplyAssembler;
+import inter.dto.SupplyDTO;
+import inter.dto.SupplyElement;
+import inter.dto.SupplyElementDTO;
 import inter.garbage.Nonburnable;
 import inter.garbage.PlasticRecyclable;
 
@@ -10,13 +18,20 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import common.GarbageFlyweightFactory;
+
 public class SupplyAssemblerTest {
 	private SupplyAssembler supplyAssembler;
+	private GarbageFlyweightFactory garbageflyweightinst = GarbageFlyweightFactory.getInstance();
 
 	@Test
 	public void DTOでの取得() throws Exception {
 		Supplier supplier = new Supplier("KIRIN", SupplierCategory.Beveragemanufacturer);
 		Supply supply = new Supply("Oolong tea", supplier);
+
+		/*
+		 * テストケース分newすることになる。これは大変。。
+		 */
 		supply.addSupplyElement(new SupplyElement(50, new Nonburnable()));
 		supply.addSupplyElement(new SupplyElement(150, new PlasticRecyclable()));
 
@@ -40,10 +55,14 @@ public class SupplyAssemblerTest {
 		SupplyElementDTO[] supplyelements = new SupplyElementDTO[2];
 		supplyelements[0] = new SupplyElementDTO();
 		supplyelements[0].setWeight(50);
-		supplyelements[0].setGarbageelement(new Nonburnable());
+
+		/*
+		 * Flyweightで同一インスタンスを使いまわす。
+		 */
+		supplyelements[0].setGarbageelement(garbageflyweightinst.getGarbageInstance("Nonburnable"));
 		supplyelements[1] = new SupplyElementDTO();
 		supplyelements[1].setWeight(150);
-		supplyelements[1].setGarbageelement(new PlasticRecyclable());
+		supplyelements[1].setGarbageelement(garbageflyweightinst.getGarbageInstance("PlasticRecyclable"));
 		supplyDTO.setSupplyelement(supplyelements);
 
 		supplyAssembler.createSupply("1", supplyDTO);
@@ -68,8 +87,8 @@ public class SupplyAssemblerTest {
 		supplier = new Supplier("ASAHI", SupplierCategory.Beveragemanufacturer);
 		ResistrySupply.insertSuppier(supplier);
 		Supply supply = new Supply("Oolong tea", supplier);
-		supply.addSupplyElement(new SupplyElement(50, new Nonburnable()));
-		supply.addSupplyElement(new SupplyElement(150, new PlasticRecyclable()));
+		supply.addSupplyElement(new SupplyElement(50, garbageflyweightinst.getGarbageInstance("Nonburnable")));
+		supply.addSupplyElement(new SupplyElement(150, garbageflyweightinst.getGarbageInstance("PlasticRecyclable")));
 		ResistrySupply.insertSuppliy("1", supply);
 
 		SupplyDTO supplyDTO = new SupplyDTO();
@@ -78,7 +97,7 @@ public class SupplyAssemblerTest {
 		SupplyElementDTO[] supplyelements = new SupplyElementDTO[1];
 		supplyelements[0] = new SupplyElementDTO();
 		supplyelements[0].setWeight(60);
-		supplyelements[0].setGarbageelement(new Nonburnable());
+		supplyelements[0].setGarbageelement(garbageflyweightinst.getGarbageInstance("Nonburnable"));
 		supplyDTO.setSupplyelement(supplyelements);
 
 		supplyAssembler.updataSupply("1", supplyDTO);
