@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import inter.garbage.Nonburnable;
 import inter.garbage.PlasticRecyclable;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,76 +30,69 @@ public class SupplyAssemblerTest {
 		assertThat(tracks[1].getWeight(), is(150));
 		assertThat(tracks[1].getGarbageelement(), is(instanceOf(PlasticRecyclable.class)));
 	}
-/*
 	@Test
 	public void DTOでの登録() throws Exception {
-		Artist artist = new Artist("Liszt", "indies");
-		Resistry.insertArtist(artist);
-		AlbumDTO albumDTO = new AlbumDTO();
-		albumDTO.setArtist("Liszt");
-		albumDTO.setTitle("Liszt Best");
-		TrackDTO[] tracks = new TrackDTO[2];
-		tracks[0] = new TrackDTO();
-		tracks[0].setTitle("Liebestraum");
-		tracks[0].setTime("4:00");
-		tracks[1] = new TrackDTO();
-		tracks[1].setTitle("Hungarian Rhapsody");
-		tracks[1].setTime("2:40");
-		albumDTO.setTracks(tracks);
+		Supplier supplier = new Supplier("KIRIN", SupplierCategory.Beveragemanufacturer);
+		ResistrySupply.insertSuppier(supplier);
+		SupplyDTO supplyDTO = new SupplyDTO();
+		supplyDTO.setSuppliername("KIRIN");
+		supplyDTO.setSupplyname("Oolong tea");
+		SupplyElementDTO[] supplyelements = new SupplyElementDTO[2];
+		supplyelements[0] = new SupplyElementDTO();
+		supplyelements[0].setWeight(50);
+		supplyelements[0].setGarbageelement(new Nonburnable());
+		supplyelements[1] = new SupplyElementDTO();
+		supplyelements[1].setWeight(150);
+		supplyelements[1].setGarbageelement(new PlasticRecyclable());
+		supplyDTO.setSupplyelement(supplyelements);
 
-		albumAssembler.createAlbum("1", albumDTO);
+		supplyAssembler.createSupply("1", supplyDTO);
 
-		Album album = Resistry.findAlbum("1");
-		assertThat(album.getTitle(), is("Liszt Best"));
-		assertThat(album.getArtist().getName(), is("Liszt"));
-		assertThat(album.getArtist().getLabel(), is("indies"));
-		List<Track> trackList = album.getTrackList();
-		Track track1 = trackList.get(0);
-		assertThat(track1.getTitle(), is("Liebestraum"));
-		assertThat(track1.getTime(), is("4:00"));
-		Track track2 = trackList.get(1);
-		assertThat(track2.getTitle(), is("Hungarian Rhapsody"));
-		assertThat(track2.getTime(), is("2:40"));
+		Supply supply = ResistrySupply.findSupply("1");
+		assertThat(supply.getName(), is("Oolong tea"));
+		assertThat(supply.getSupplier().getName(), is("KIRIN"));
+		assertThat(supply.getSupplier().getCategory(), is(SupplierCategory.Beveragemanufacturer));
+		List<SupplyElement> supplyelementList = supply.getSeList();
+		SupplyElement SupplyElement1 = supplyelementList.get(0);
+		assertThat(SupplyElement1.getWeight(), is(50));
+		assertThat(SupplyElement1.getGarbageelement(), is(instanceOf(Nonburnable.class)));
+		SupplyElement SupplyElement2 = supplyelementList.get(1);
+		assertThat(SupplyElement2.getWeight(), is(150));
+		assertThat(SupplyElement2.getGarbageelement(), is(instanceOf(PlasticRecyclable.class)));
 	}
 
 	@Test
 	public void DTOでの更新() throws Exception {
-		Artist artist = new Artist("Liszt", "indies");
-		Resistry.insertArtist(artist);
-		artist = new Artist("Liszt Fake", "indies");
-		Resistry.insertArtist(artist);
-		Album album = new Album("Liszt Best", artist);
-		album.addTrack(new Track("Liebestraum", "4:00"));
-		album.addTrack(new Track("Hungarian Rhapsody", "2:40"));
-		Resistry.insertAlbum("1", album);
+		Supplier supplier = new Supplier("KIRIN", SupplierCategory.Beveragemanufacturer);
+		ResistrySupply.insertSuppier(supplier);
+		supplier = new Supplier("ASAHI", SupplierCategory.Beveragemanufacturer);
+		ResistrySupply.insertSuppier(supplier);
+		Supply supply = new Supply("Oolong tea", supplier);
+		supply.addSupplyElement(new SupplyElement(50, new Nonburnable()));
+		supply.addSupplyElement(new SupplyElement(150, new PlasticRecyclable()));
+		ResistrySupply.insertSuppliy("1", supply);
 
-		AlbumDTO albumDTO = new AlbumDTO();
-		albumDTO.setArtist("Liszt Fake");
-		albumDTO.setTitle("Liszt Worst");
-		TrackDTO[] tracks = new TrackDTO[2];
-		tracks[0] = new TrackDTO();
-		tracks[0].setTitle("Liebestraum Fake");
-		tracks[0].setTime("4:40");
-		tracks[1] = new TrackDTO();
-		tracks[1].setTitle("Hungarian Rhapsody Fake");
-		tracks[1].setTime("3:40");
-		albumDTO.setTracks(tracks);
+		SupplyDTO supplyDTO = new SupplyDTO();
+		supplyDTO.setSuppliername("ASAHI");
+		supplyDTO.setSupplyname("Super Dry");
+		SupplyElementDTO[] supplyelements = new SupplyElementDTO[1];
+		supplyelements[0] = new SupplyElementDTO();
+		supplyelements[0].setWeight(60);
+		supplyelements[0].setGarbageelement(new Nonburnable());
+		supplyDTO.setSupplyelement(supplyelements);
 
-		albumAssembler.updataAlbum("1", albumDTO);
+		supplyAssembler.updataSupply("1", supplyDTO);
 
-		album = Resistry.findAlbum("1");
-		assertThat(album.getTitle(), is("Liszt Worst"));
-		assertThat(album.getArtist().getName(), is("Liszt Fake"));
+		supply = ResistrySupply.findSupply("1");
+		assertThat(supply.getName(), is("Super Dry"));
+		assertThat(supply.getSupplier().getName(), is("ASAHI"));
 
-		List<Track> trackList = album.getTrackList();
-		Track track1 = trackList.get(0);
-		assertThat(track1.getTitle(), is("Liebestraum Fake"));
-		assertThat(track1.getTime(), is("4:40"));
-		Track track2 = trackList.get(1);
-		assertThat(track2.getTitle(), is("Hungarian Rhapsody Fake"));
-		assertThat(track2.getTime(), is("3:40"));
+		List<SupplyElement> seList = supply.getSeList();
+		SupplyElement supplyelement1 = seList.get(0);
+		assertThat(supplyelement1.getWeight(), is(60));
+		assertThat(supplyelement1.getGarbageelement(), is(instanceOf(Nonburnable.class)));
 	}
-*/
+
 	@Before
 	public void 準備() {
 		supplyAssembler = new SupplyAssembler();

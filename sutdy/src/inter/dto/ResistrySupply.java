@@ -11,8 +11,8 @@ public class ResistrySupply {
 		return suppliers.get(name);
 	}
 
-	public static void insertSupply(Supplier artist) {
-		suppliers.put(artist.getName(), artist);
+	public static void insertSuppier(Supplier supplier) {
+		suppliers.put(supplier.getName(), supplier);
 	}
 
 	public static void clearSupplier() {

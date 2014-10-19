@@ -30,7 +30,7 @@ public class SupplyAssembler {
 	}
 
 	public void createSupply(String id, SupplyDTO supplyDTO) {
-		Supplier supplier = ResistrySupply.findSupplyByName(supplyDTO.getSupplyname());
+		Supplier supplier = ResistrySupply.findSupplyByName(supplyDTO.getSuppliername());
 		if (supplier == null) {
 			throw new FatalAppRuntimeException("supply not found.",this.getClass());
 		}
